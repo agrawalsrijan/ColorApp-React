@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ColorBox from "./ColorBox";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-
+// local css should come after the rc-slider css
 import "./Pallete.css";
 class Pallete extends Component{
   constructor(props){
@@ -21,14 +21,15 @@ class Pallete extends Component{
     ));
     return(
       <div className="Pallete">
-
-        <Slider
-          defaultValue={level}
-          min={100}
-          max={900}
-          step={100}
-          onAfterChange={this.changeLevel}
-        />
+        <div className="slider">
+          <Slider
+            defaultValue={level}
+            min={100}
+            max={900}
+            step={100}
+            onAfterChange={this.changeLevel}
+          />
+        </div>
 
         {/* navbar goes here */}
         <div className="Pallete-colors">
