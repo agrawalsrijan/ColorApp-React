@@ -4,8 +4,8 @@ import ColorBox from "./ColorBox";
 import "./Pallete.css";
 class Pallete extends Component{
   render(){
-    const colorBoxes = this.props.colors.map(color=>(
-      <ColorBox background={color.color} name={color.name}/>
+    const colorBoxes = this.props.pallete.colors[800].map(color=>(
+      <ColorBox background={color.hex} name={color.name}/>
     ));
     return(
       <div className="Pallete">

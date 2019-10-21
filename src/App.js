@@ -5,10 +5,10 @@ import seedColors from "./seedColors";
 
 class App extends Component {
   render(){
-    console.log(generatePallete(seedColors[4]))
+    
     return (
       <div>
-        <Pallete {...seedColors[4]}/>
+        <Pallete pallete={generatePallete(seedColors[4])}/>
       </div>
     );
   }
