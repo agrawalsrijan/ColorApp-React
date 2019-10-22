@@ -5,6 +5,12 @@ import {generatePallete} from "./colorHelper";
 import seedColors from "./seedColors";
 
 class App extends Component {
+// function to find pallete by id
+  findPallete(id){
+    return seedColors.find(function(pallete){
+      return pallete.id === id;
+    });
+  }
   render(){
 
     return (
@@ -19,7 +25,12 @@ class App extends Component {
         <Route
           exact
           path="/pallete/:id"
-          render={()=> <h1>Individual pallete goes here</h1>}
+          render={routeProps => (
+            <Pallete pallete={generatePallete(
+              this.findPallete(routeProps.match.params.id)
+              )}
+            />
+          )}
         />
       </Switch>
 
