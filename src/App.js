@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PalleteList from "./PalleteList";
 import Pallete from "./Pallete";
 import {Route,Switch} from "react-router-dom";
 import {generatePallete} from "./colorHelper";
@@ -19,7 +20,7 @@ class App extends Component {
         <Route
           exact
           path="/"
-          render={()=> <h1>Pallete list goes here</h1>}
+          render={()=> <PalleteList palletes={seedColors}/>}
         />
 
         <Route
