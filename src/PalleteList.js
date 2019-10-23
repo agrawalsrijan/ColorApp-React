@@ -38,6 +38,9 @@ const styles = {
 
 
 class PalleteList extends Component{
+  goToPallete(id){
+    this.props.history.push(`/pallete/${id}`)
+  }
 
   render(){
     const {palletes,classes} = this.props;
@@ -50,7 +53,10 @@ class PalleteList extends Component{
           </nav>
           <div className={classes.palletes}>
             {palletes.map(pallete=>(
-              <MiniPallete {...pallete}/>
+              <MiniPallete
+                {...pallete}
+                handleClick={()=>this.goToPallete(pallete.id)}
+              />
             ))}
           </div>
         </div>
