@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import MiniPallete from "./MiniPallete";
 
 class PalleteList extends Component{
 
@@ -8,6 +9,7 @@ class PalleteList extends Component{
     return(
 
       <div>
+        <MiniPallete/>
         <h1>React Colors!</h1>
         {palletes.map(pallete=>(
           <p>
