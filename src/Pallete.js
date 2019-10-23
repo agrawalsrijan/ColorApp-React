@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ColorBox from "./ColorBox";
 import Navbar from "./Navbar";
+import PalleteFooter from "./PalleteFooter";
 import "./Pallete.css";
 class Pallete extends Component{
 // Constructor-
@@ -40,15 +41,13 @@ class Pallete extends Component{
           level={level}
           changeLevel={this.changeLevel}
           handleChange={this.changeFormat}
+          showingAllColors={true}
         />
         <div className="Pallete-colors">
           {/*bunch of color boxes*/}
           {colorBoxes}
         </div>
-        <footer className="Pallete-footer">
-          {palleteName}
-          <span className="emoji">{emoji}</span>
-        </footer>
+        <PalleteFooter palleteName={palleteName} emoji={emoji}/>
 
       </div>
 
