@@ -3,7 +3,7 @@ import ColorBox from "./ColorBox";
 import Navbar from "./Navbar";
 import PalleteFooter from "./PalleteFooter";
 import {Link} from "react-router-dom";
-import {CopyToClipboard} from "react-copy-to-clipboard";
+
 
 
 
@@ -38,7 +38,7 @@ class SingleColorPallete extends Component{
 
   render(){
     const {format} = this.state;
-    const {palleteName,emoji} = this.props.pallete;
+    const {palleteName,emoji,id} = this.props.pallete;
     const colorBoxes = this._shades.map(color=>(
       <ColorBox
         key={color.name}
@@ -48,11 +48,14 @@ class SingleColorPallete extends Component{
       />
     ))
     return(
-      <div className="Pallete">
+      <div className="SingleColorPallete Pallete">
         <Navbar handleChange={this.changeFormat} showingAllColors={false}/>
 
         <div className="Pallete-colors">
           {colorBoxes}
+          <div className="go-back ColorBox">
+            <Link to={`/pallete/${id}`} className="back-button">Go Back</Link>
+          </div>
         </div>
         <PalleteFooter palleteName={palleteName} emoji={emoji}/>
       </div>
