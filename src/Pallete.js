@@ -32,7 +32,7 @@ class Pallete extends Component{
         key={color.id}
         id={color.id}
         palleteId={id}
-        showLink={true}
+        showingFullPallete={true}
       />
     ));
     return(
