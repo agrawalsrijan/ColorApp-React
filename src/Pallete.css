@@ -1,11 +1,11 @@
-.Pallete{
+/* .Pallete{
   height: 100vh;
   display: flex;
   flex-direction: column;
-}
-.Pallete-colors{
+} */
+/* .Pallete-colors{
   height: 90%;
-}
+} */
 .Pallete-footer{
   background-color: white;
   height: 5vh;

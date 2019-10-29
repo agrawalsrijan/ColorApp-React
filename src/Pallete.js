@@ -2,7 +2,20 @@ import React, {Component} from 'react';
 import ColorBox from "./ColorBox";
 import Navbar from "./Navbar";
 import PalleteFooter from "./PalleteFooter";
+import {withStyles} from "@material-ui/styles";
 import "./Pallete.css";
+
+const styles = {
+  Pallete:{
+    height: "100vh",
+    display: "flex",
+    flexDirection: "column"
+  },
+  colors:{
+    height: "90%"
+  }
+}
+
 class Pallete extends Component{
 // Constructor-
   constructor(props){
@@ -24,6 +37,7 @@ class Pallete extends Component{
 // components render-
   render(){
     const {colors,palleteName,emoji,id} = this.props.pallete;
+    const {classes} = this.props;
     const {level,format} = this.state;
     const colorBoxes = colors[level].map(color=>(
       <ColorBox
@@ -36,14 +50,14 @@ class Pallete extends Component{
       />
     ));
     return(
-      <div className="Pallete">
+      <div className={classes.Pallete}>
         <Navbar
           level={level}
           changeLevel={this.changeLevel}
           handleChange={this.changeFormat}
           showingAllColors={true}
         />
-        <div className="Pallete-colors">
+        <div className={classes.colors}>
           {/*bunch of color boxes*/}
           {colorBoxes}
         </div>
@@ -54,4 +68,4 @@ class Pallete extends Component{
     )
   }
 }
-export default Pallete;
+export default withStyles(styles)(Pallete);
