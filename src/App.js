@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PalleteList from "./PalleteList";
 import Pallete from "./Pallete";
 import SingleColorPallete from "./SingleColorPallete";
+import NewPalleteForm from "./NewPalleteForm";
 import {Route,Switch} from "react-router-dom";
 import {generatePallete} from "./colorHelper";
 import seedColors from "./seedColors";
@@ -17,6 +18,11 @@ class App extends Component {
 
     return (
       <Switch>
+        <Route
+          exact
+          path = "/pallete/new"
+          render = {() => <NewPalleteForm/>}
+        />
 
         <Route
           exact
@@ -35,7 +41,7 @@ class App extends Component {
           )}
         />
 
-    
+
         <Route
           exact
           path="/pallete/:palleteId/:colorId"
