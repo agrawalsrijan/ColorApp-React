@@ -8,11 +8,20 @@ import {generatePallete} from "./colorHelper";
 import seedColors from "./seedColors";
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {palletes:seedColors};
+    this.savePallete = this.savePallete.bind(this);
+    this.findPallete = this.findPallete.bind(this);
+  }
 // function to find pallete by id
   findPallete(id){
-    return seedColors.find(function(pallete){
+    return this.state.palletes.find(function(pallete){
       return pallete.id === id;
     });
+  }
+  savePallete(newPallete){
+    this.setState({palletes:[...this.state.palletes,newPallete]});
   }
   render(){
 
@@ -21,13 +30,15 @@ class App extends Component {
         <Route
           exact
           path = "/pallete/new"
-          render = {() => <NewPalleteForm/>}
+          render = {(routeProps) => (
+            <NewPalleteForm savePallete={this.savePallete} {...routeProps}/>
+          )}
         />
 
         <Route
           exact
           path="/"
-          render={(routeProps)=> <PalleteList palletes={seedColors} {...routeProps}/>}
+          render={(routeProps)=> <PalleteList palletes={this.state.palletes} {...routeProps}/>}
         />
 
         <Route
