@@ -7,6 +7,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {ValidatorForm, TextValidator} from "react-material-ui-form-validator";
+import "emoji-mart/css/emoji-mart.css";
+import {Picker} from "emoji-mart";
 
 class PalleteMetaForm extends Component{
   constructor(props){
@@ -38,21 +40,23 @@ class PalleteMetaForm extends Component{
   };
 
   render() {
-    const {newPalleteName} = this.state;
+    const {newPalleteName,open} = this.state;
+    const {hideForm,handleSubmit} = this.props;
     return (
        <Dialog
-         open={this.state.open}
-          onClose={this.handleClose}
+         open={open}
+          onClose={hideForm}
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">Choose a Pallete Name</DialogTitle>
           <ValidatorForm
-            onSubmit={() => this.props.handleSubmit(newPalleteName)}
+            onSubmit={() => handleSubmit(newPalleteName)}
           >
             <DialogContent>
               <DialogContentText>
                 Please enter a name for your new beautiful pallete. Make sure it's unique!
               </DialogContentText>
+              <Picker/>
               <TextValidator
                 label="Pallete Name"
                 value={newPalleteName}
@@ -65,7 +69,7 @@ class PalleteMetaForm extends Component{
               />
             </DialogContent>
             <DialogActions>
-              <Button onClick={this.handleClose} color="primary">
+              <Button onClick={hideForm} color="primary">
                 Cancel
               </Button>
               <Button
