@@ -1,6 +1,7 @@
 import React,{Component} from "react";
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
+import PalleteMetaForm from "./PalleteMetaForm";
 import {Link} from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -46,24 +47,14 @@ class PalleteFormNav extends Component{
   constructor(props){
     super(props);
     this.state = {newPalleteName:""};
-    this.handleChange = this.handleChange.bind(this);
-  }
-  componentDidMount(){
-    ValidatorForm.addValidationRule("isPalleteNameUnique", value =>
-      this.props.palletes.every(
-        ({ paletteName }) => paletteName.toLowerCase() !== value.toLowerCase()
-      )
-    );
-  }
-  handleChange(evt){
-    this.setState({
-      [evt.target.name]: evt.target.value
-    });
+
   }
 
+
+
   render(){
-    const {classes,open} = this.props;
-    const {newPalleteName} = this.state;
+    const {classes,open,palletes,handleSubmit} = this.props;
+
     return(
       <div className={classes.root}>
         <CssBaseline />
@@ -89,26 +80,8 @@ class PalleteFormNav extends Component{
 
           </Toolbar>
           <div className={classes.navBtns}>
-            <ValidatorForm
-              onSubmit={() => this.props.handleSubmit(newPalleteName)}
-            >
-              <TextValidator
-                label="Pallete Name"
-                value={this.state.newPalleteName}
-                name="newPalleteName"
-                onChange={this.handleChange}
-                validators={["required","isPalleteNameUnique"]}
-                errorMessages={["Enter Pallete Name","Name already used"]}
-              />
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-              >
-                Save Pallete
-              </Button>
 
-            </ValidatorForm>
+            <PalleteMetaForm palletes={palletes} handleSubmit={handleSubmit}/>
             <Link to="/">
               <Button variant="contained" color="secondary">Go Back</Button>
             </Link>
