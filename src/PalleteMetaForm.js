@@ -12,7 +12,7 @@ class PalleteMetaForm extends Component{
   constructor(props){
     super(props);
     this.state = {
-      open: false,
+      open: true,
       newPalleteName:""
     };
     this.handleChange = this.handleChange.bind(this);
@@ -40,30 +40,34 @@ class PalleteMetaForm extends Component{
   render() {
     const {newPalleteName} = this.state;
     return (
-      <div>
-       <Button onClick={this.handleClickOpen}>Open form dialog</Button>
        <Dialog
          open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              To subscribe to this website, please enter your email address here. We will send
-              updates occasionally.
-            </DialogContentText>
-            <ValidatorForm
-              onSubmit={() => this.props.handleSubmit(newPalleteName)}
-            >
+          <DialogTitle id="form-dialog-title">Choose a Pallete Name</DialogTitle>
+          <ValidatorForm
+            onSubmit={() => this.props.handleSubmit(newPalleteName)}
+          >
+            <DialogContent>
+              <DialogContentText>
+                Please enter a name for your new beautiful pallete. Make sure it's unique!
+              </DialogContentText>
               <TextValidator
                 label="Pallete Name"
                 value={newPalleteName}
                 name="newPalleteName"
+                fullWidth
+                margin="normal"
                 onChange={this.handleChange}
                 validators={["required","isPalleteNameUnique"]}
                 errorMessages={["Enter Pallete Name","Name already used"]}
               />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Cancel
+              </Button>
               <Button
                 variant="contained"
                 color="primary"
@@ -71,19 +75,9 @@ class PalleteMetaForm extends Component{
               >
                 Save Pallete
               </Button>
-
-            </ValidatorForm>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={this.handleClose} color="primary">
-              Subscribe
-            </Button>
-          </DialogActions>
+            </DialogActions>
+          </ValidatorForm>
         </Dialog>
-      </div>
     );
   }
 }
