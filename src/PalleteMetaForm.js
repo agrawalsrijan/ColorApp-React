@@ -1,6 +1,5 @@
 import React,{Component} from "react";
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -14,10 +13,12 @@ class PalleteMetaForm extends Component{
   constructor(props){
     super(props);
     this.state = {
-      open: true,
+      stage: "form",
       newPalleteName:""
     };
     this.handleChange = this.handleChange.bind(this);
+    this.showEmojiPicker = this.showEmojiPicker.bind(this);
+    this.savePallete = this.savePallete.bind(this);
   }
   componentDidMount(){
     ValidatorForm.addValidationRule("isPalleteNameUnique", value =>
@@ -31,6 +32,17 @@ class PalleteMetaForm extends Component{
       [evt.target.name]: evt.target.value
     });
   }
+  showEmojiPicker(){
+    this.setState({stage:"emoji"});
+  }
+  savePallete(emoji){
+    const newPallete = {
+      palleteName:this.state.newPalleteName,
+      emoji:emoji.native
+    }
+    this.props.handleSubmit(newPallete);
+
+  }
   handleClickOpen = () => {
    this.setState({ open: true });
   };
@@ -40,23 +52,30 @@ class PalleteMetaForm extends Component{
   };
 
   render() {
-    const {newPalleteName,open} = this.state;
-    const {hideForm,handleSubmit} = this.props;
+    const {newPalleteName} = this.state;
+    const {hideForm} = this.props;
     return (
-       <Dialog
-         open={open}
+      <div>
+        <Dialog
+          open={this.state.stage === "emoji"}
+          onClose={hideForm}
+        >
+        <DialogTitle id="form-dialog-title">Choose a Pallete Emoji</DialogTitle>
+          <Picker title="Pick a Pallete Emoji" onSelect={this.savePallete}/>
+        </Dialog>
+        <Dialog
+          open={this.state.stage === "form"}
           onClose={hideForm}
           aria-labelledby="form-dialog-title"
         >
           <DialogTitle id="form-dialog-title">Choose a Pallete Name</DialogTitle>
           <ValidatorForm
-            onSubmit={() => handleSubmit(newPalleteName)}
+            onSubmit={this.showEmojiPicker}
           >
             <DialogContent>
               <DialogContentText>
                 Please enter a name for your new beautiful pallete. Make sure it's unique!
               </DialogContentText>
-              <Picker/>
               <TextValidator
                 label="Pallete Name"
                 value={newPalleteName}
@@ -82,6 +101,7 @@ class PalleteMetaForm extends Component{
             </DialogActions>
           </ValidatorForm>
         </Dialog>
+      </div>
     );
   }
 }
