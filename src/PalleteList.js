@@ -4,20 +4,14 @@ import {Link} from "react-router-dom";
 import styles from "./styles/PalleteListStyles";
 import MiniPallete from "./MiniPallete";
 
-
-
-
-
-
 class PalleteList extends Component{
   goToPallete(id){
     this.props.history.push(`/pallete/${id}`)
   }
 
   render(){
-    const {palletes,classes} = this.props;
+    const {palletes,classes,deletePallete} = this.props;
     return(
-
       <div className = {classes.root}>
         <div className={classes.container}>
           <nav className={classes.nav}>
@@ -29,6 +23,9 @@ class PalleteList extends Component{
               <MiniPallete
                 {...pallete}
                 handleClick={()=>this.goToPallete(pallete.id)}
+                handleDelete={deletePallete}
+                key={pallete.id}
+                id={pallete.id}
               />
             ))}
           </div>

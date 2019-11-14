@@ -14,12 +14,19 @@ class App extends Component {
     this.state = {palletes:savedPalletes || seedColors};
     this.savePallete = this.savePallete.bind(this);
     this.findPallete = this.findPallete.bind(this);
+    this.deletePallete = this.deletePallete.bind(this);
   }
 // function to find pallete by id
   findPallete(id){
     return this.state.palletes.find(function(pallete){
       return pallete.id === id;
     });
+  }
+  deletePallete(id){
+    this.setState(
+      st => ({palletes:st.palletes.filter(pallete => pallete.id !== id)}),
+      this.syncLocalStorage
+    );
   }
   savePallete(newPallete){
     this.setState({palletes:[...this.state.palletes,newPallete]},
@@ -50,7 +57,12 @@ class App extends Component {
         <Route
           exact
           path="/"
-          render={(routeProps)=> <PalleteList palletes={this.state.palletes} {...routeProps}/>}
+          render={(routeProps)=>
+            <PalleteList
+              palletes={this.state.palletes}
+              deletePallete={this.deletePallete} {...routeProps}
+            />
+          }
         />
 
         <Route
