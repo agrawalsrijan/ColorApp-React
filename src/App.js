@@ -10,7 +10,8 @@ import seedColors from "./seedColors";
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = {palletes:seedColors};
+    const savedPalletes = JSON.parse(window.localStorage.getItem("palletes"));
+    this.state = {palletes:savedPalletes || seedColors};
     this.savePallete = this.savePallete.bind(this);
     this.findPallete = this.findPallete.bind(this);
   }
@@ -21,7 +22,14 @@ class App extends Component {
     });
   }
   savePallete(newPallete){
-    this.setState({palletes:[...this.state.palletes,newPallete]});
+    this.setState({palletes:[...this.state.palletes,newPallete]},
+      this.syncLocalStorage);
+  }
+  syncLocalStorage(){
+    //save palletes to local localStorage
+    window.localStorage.setItem(
+      "palletes",JSON.stringify(this.state.palletes)
+    );
   }
   render(){
 
