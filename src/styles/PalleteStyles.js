@@ -1,3 +1,4 @@
+import sizes from "./sizes";
 export default {
   Pallete:{
     height: "100vh",
@@ -36,6 +37,18 @@ export default {
       border:"none",
       textDecoration: "none",
       opacity: "1"
+    },
+    [sizes.down("lg")]:{
+      width:"25%",
+      height: "33.33%"
+    },
+    [sizes.down("md")]:{
+      width:"50%",
+      height: "20%"
+    },
+    [sizes.down("xs")]:{
+      width:"100%",
+      height: "10%"
     }
   }
 }
