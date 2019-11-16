@@ -7,7 +7,7 @@ import {CSSTransition, TransitionGroup} from "react-transition-group";
 import {Route,Switch} from "react-router-dom";
 import {generatePallete} from "./colorHelper";
 import seedColors from "./seedColors";
-import "./App.css";
+import Page from "./Page";
 
 class App extends Component {
   constructor(props){
@@ -46,19 +46,19 @@ class App extends Component {
       <Route
         render={({location}) =>(
           <TransitionGroup>
-            <CSSTransition key={location.key} classNames="fade" timeout={300}>
+            <CSSTransition key={location.key} classNames="page" timeout={300}>
               <Switch location={location}>
                 <Route
                   exact
                   path = "/pallete/new"
                   render = {(routeProps) => (
-                    <div className="page">
+                    <Page>
                       <NewPalleteForm
                         savePallete={this.savePallete}
                         palletes={this.state.palletes}
                         {...routeProps}
                       />
-                    </div>
+                    </Page>
                   )}
                 />
 
@@ -66,12 +66,12 @@ class App extends Component {
                   exact
                   path="/"
                   render={(routeProps)=> (
-                    <div className="page">
+                    <Page>
                       <PalleteList
                         palletes={this.state.palletes}
                         deletePallete={this.deletePallete} {...routeProps}
                       />
-                    </div>
+                    </Page>
                   )}
                 />
 
@@ -79,12 +79,12 @@ class App extends Component {
                   exact
                   path="/pallete/:id"
                   render={routeProps => (
-                    <div className="page">
+                    <Page>
                       <Pallete pallete={generatePallete(
                         this.findPallete(routeProps.match.params.id)
                         )}
                       />
-                    </div>
+                    </Page>
                   )}
                 />
 
@@ -93,14 +93,14 @@ class App extends Component {
                   exact
                   path="/pallete/:palleteId/:colorId"
                   render={routeProps => (
-                    <div className="page">
+                    <Page>
                       <SingleColorPallete
                         colorId={routeProps.match.params.colorId}
                         pallete={generatePallete(
                         this.findPallete(routeProps.match.params.palleteId)
                         )}
                       />
-                    </div>
+                    </Page>
                   )}
                 />
               </Switch>
