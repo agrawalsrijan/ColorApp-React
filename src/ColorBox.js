@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import {CopyToClipboard} from "react-copy-to-clipboard";
-// colorbox styles moved to JSS styles in a seperate file
-import styles from "./styles/ColorBoxStyles";
 import {withStyles} from "@material-ui/styles";
-
-
+import styles from "./styles/ColorBoxStyles";
 
 class ColorBox extends Component{
 
@@ -32,7 +29,7 @@ class ColorBox extends Component{
           />
           <div className={`${classes.copyMessage} ${copied && classes.showMessage}`}>
             <h1>copied!</h1>
-            <p className={classes.copyText}>{this.props.background}</p>
+            <p className={classes.copyText}>{background}</p>
           </div>
           <div>
             <div className={classes.boxContent}>
@@ -49,11 +46,8 @@ class ColorBox extends Component{
               <span className={classes.seeMore}>More</span>
             </Link>
           )}
-
-
         </div>
       </CopyToClipboard>
-
     )
   }
 }
