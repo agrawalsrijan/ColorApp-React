@@ -25,6 +25,7 @@ class PalleteList extends Component{
     this.openDialog = this.openDialog.bind(this);
     this.closeDialog = this.closeDialog.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.goToPallete = this.goToPallete.bind(this);
   }
   openDialog(id){
     this.setState({openDeleteDialog:true,deletingId:id});
@@ -60,7 +61,7 @@ class PalleteList extends Component{
               >
                 <MiniPallete
                   {...pallete}
-                  handleClick={()=>this.goToPallete(pallete.id)}
+                  goToPallete={this.goToPallete}
                   // handleDelete={deletePallete}
                   openDialog={this.openDialog}
                   key={pallete.id}
