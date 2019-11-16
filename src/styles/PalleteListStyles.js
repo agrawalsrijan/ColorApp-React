@@ -46,7 +46,6 @@ export default {
     color:"white",
     "& a":{
       color:"white"
-
     }
   },
   palletes:{
